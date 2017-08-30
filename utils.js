@@ -2,25 +2,9 @@ var fs = require('fs')
 var path = require('path')
 var request = require('request')
 
-
-// exports.loadCredentials = function loadCredentails(credPath, credFileName) {
-//   let authString = "";
-//   const path = process.env.HOME + "/" + credPath + credFileName;
-//   fs.readFile(path, 'utf8', function(err,data) {
-//     if (err) {
-//       console.log(err)
-//       return Promise.reject(new Error(err))
-//     }
-//     parsedData = JSON.parse(data)
-//     authString = parsedData.key + ":" + parsedData.secret;
-//     console.log(authString)
-//     return Promise.resolve(authString)
-//     //return parsedData.key + ":" + parsedData.secret; //works
-//   })
-// }
-
 _checkStatus = function(response) {
-  console.log('response status: ' + response.status);
+  console.log('Response from API: ', response.url);
+  console.log('Status: ', response.status)
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {
@@ -54,36 +38,7 @@ exports.loadCredentials = function loadCredentials(credPath, credFileName) {
   })
 }
 
-// exports.getToken = function getToken(authServerURL, authString) {
-//   return new Promise(function(fulfill, reject) {
-//     payload = `{"Type": "Server"}`
-//     var options = {
-//       url: 'http:/someurl',
-//       headers: {
-//         'User-Agent': 'Chronos',
-//         'Authorization': 'Basic ' + authString,
-//         'Content-Type': 'application/json'
-//       },
-//       body: {
-//         'Type': 'Server'
-//       }
-//     };
-//     function postRequestCallback(error, response, body) {
-//       if(!error && response.StatusCode == 200) {
-//         var info = JSON.parse(body);
-//         console.log("Response: ", body)
-//       }
-//       else {
-//         console.log("Error: ", error)
-//       }
-//     }
-//
-//     request(options, postRequestCallback)
-//   })
-// }
-
 exports.getToken = function getToken(authServerURL, authString) {
-  console.log(authServerURL, authString)
   return new Promise(function(fulfill, reject) {
     const requestHeader = new Headers();
     requestHeader.append('User-Agent', 'Chronos');

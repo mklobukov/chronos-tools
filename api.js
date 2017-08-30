@@ -1,5 +1,6 @@
 _checkStatus = function(response) {
-  console.log('response status: ' + response.status);
+  console.log('Response from API: ', response.url);
+  console.log('Status: ', response.status)
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {

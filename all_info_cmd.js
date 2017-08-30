@@ -3,21 +3,19 @@ const api = require('./api');
 const Table = require('cli-table')
 
 module.exports = function(credPath, credFileName, authServerURL, chronosURL, skip, limit, status, state) {
-  //get credentials -- auth string
+  //get credentials
   let authString
   utils.loadCredentials(credPath, credFileName)
   .then(data => {
-    console.log("Got auth string: ", data)
     authString = data
     //get token
     utils.getToken(authServerURL, authString)
     .then(response => {
-      console.log("GOT TOKEN: ", response)
       token = response["Token"]
       api.getAllJobsInfoAPI(chronosURL, token, skip, limit, status, state)
       .then(response => {
-        //console.log("Received job descriptors: ", response)
-        console.log(response.job_descriptors[0])
+        //print job descriptors in tabular form
+        console.log(response.job_descriptors)
         this.printTable(response.job_descriptors)
       })
 
@@ -33,7 +31,7 @@ printTable = function(jobDescriptors) {
   //keys from the jobDescriptor object that will be displayed in the table
   const propsToDisplay = ["job_id", "job_name", "state", "status", "schedule", "times_executed", "next_scheduled_run"];
   //Corresponding column titles
-  const columnTitles = ["ID", "Name", "State", "Status", "Schedule", "Times to Repeat", "Times Executed", "Next Scheduled Time"];
+  const columnTitles = ["ID", "Name", "State", "Status", "Schedule", "Times Executed", "Next Scheduled Time"];
 
   const table = new Table({
     head: columnTitles
