@@ -15,7 +15,6 @@ module.exports = function(credPath, credFileName, authServerURL, chronosURL, ski
       api.getAllJobsInfoAPI(chronosURL, token, skip, limit, status, state)
       .then(response => {
         //print job descriptors in tabular form
-        console.log(response.job_descriptors)
         this.printTable(response.job_descriptors)
       })
 
@@ -41,7 +40,12 @@ printTable = function(jobDescriptors) {
     let tableRow = [];
     propsToDisplay.forEach(function(prop) {
       if (job.hasOwnProperty(prop)) {
-        tableRow.push(job[prop])
+        if (prop == "next_scheduled_run") {
+          tableRow.push(new Date(job[prop] * 1000).toUTCString())
+        }
+        else {
+          tableRow.push(job[prop])
+        }
       } else {
         tableRow.push("")
       }
