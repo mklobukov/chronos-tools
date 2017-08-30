@@ -17,8 +17,7 @@ module.exports = function(credPath, credFileName, authServerURL, chronosURL, ski
         //print job descriptors in tabular form
         this.printTable(response.job_descriptors)
       })
-
-      })
+     })
     })
   .catch(error => {
     console.log(error)

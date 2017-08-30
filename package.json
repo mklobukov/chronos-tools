@@ -26,7 +26,8 @@
   ],
   "dependencies": {
     "request": "2.81.0",
-    "cli-table":  "0.3.1"
+    "cli-table":  "0.3.1",
+    "dockerode": "2.5.0"
   },
   "devDependencies": {
     "babel-cli": "6.10.1",

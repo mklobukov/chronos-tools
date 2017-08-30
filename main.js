@@ -12,6 +12,7 @@ switch(cmd) {
     break;
 
   case "publish":
+
     break;
 
   case "schedule":
