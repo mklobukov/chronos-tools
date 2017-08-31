@@ -38,6 +38,19 @@ exports.loadCredentials = function loadCredentials(credPath, credFileName) {
   })
 }
 
+exports.loadDataFromFile = function loadDataFromFile(filePath) {
+  return new Promise(function (fulfill, reject) {
+    fs.readFile(filePath, 'utf8', function(err,data) {
+      if (err) {
+        console.log(err)
+        reject(err)
+      } else {
+        return fulfill(data)
+      }
+    })
+  })
+}
+
 exports.getToken = function getToken(authServerURL, authString) {
   return new Promise(function(fulfill, reject) {
     const requestHeader = new Headers();

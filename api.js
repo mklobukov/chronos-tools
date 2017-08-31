@@ -36,3 +36,50 @@ exports.getAllJobsInfoAPI = function getAllJobsInfoAPI(chronosURL, token, skip, 
     })
   })
 }
+
+exports.getVersionAPI = function getVersionAPI(chronosURL) {
+  const url = chronosURL + "/v1/version";
+  return new Promise(function(fulfill, reject) {
+    const requestHeader = new Headers();
+    requestHeader.append('User-Agent', 'Chronos');
+    //requestHeader.append('Authorization', 'Bearer ' + token);
+    requestHeader.append('Content-Type', 'application/json');
+    return fetch(url, {
+      method: 'GET',
+      headers: requestHeader
+    })
+    .then(this._checkStatus)
+    .then(this._parseJSON)
+    .then(data => {
+      fulfill(data)
+    })
+    .catch(error => {
+      console.log(error)
+      reject(error)
+    })
+  })
+}
+
+exports.scheduleJobAPI = function scheduleJobAPI(chronosURL, token, requestBody) {
+  const url = chronosURL + "/v1/schedule";
+  return new Promise(function(fulfill, reject) {
+    const requestHeader = new Headers();
+    //requestHeader.append('User-Agent', 'Chronos');
+    requestHeader.append('Authorization', 'Bearer ' + token);
+    requestHeader.append('Content-Type', 'application/json');
+    return fetch(url, {
+      method: 'POST',
+      headers: requestHeader,
+      body: requestBody
+    })
+    .then(this._checkStatus)
+    .then(this._parseJSON)
+    .then(data => {
+      fulfill(data)
+    })
+    .catch(error => {
+      console.log(error)
+      reject(error)
+    })
+  })
+}
