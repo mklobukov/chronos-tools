@@ -4,6 +4,7 @@ const publish = require('./publish_cmd')
 const Config = require('./config')
 const version = require('./version_cmd')
 const schedule = require('./schedule_cmd')
+const utils = require('./utils');
 //argv[0] -- node binary path
 //argv[1] -- current directory
 var cmd = process.argv[2];
@@ -39,6 +40,12 @@ switch(cmd) {
 
   case "version":
     version(Config.chronosFullURL);
+    break;
+
+  case "test":
+    utils.loadCredentialsAndGetToken(Config.credPath, Config.credFileName, Config.authServerURL)
+    .then(data => {console.log(data)})
+    .catch(err => {console.log(err)})
     break;
 
   default:

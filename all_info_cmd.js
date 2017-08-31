@@ -5,20 +5,15 @@ const Table = require('cli-table')
 module.exports = function(credPath, credFileName, authServerURL, chronosURL, skip, limit, status, state) {
   //get credentials
   let authString
-  utils.loadCredentials(credPath, credFileName)
-  .then(data => {
-    authString = data
-    //get token
-    utils.getToken(authServerURL, authString)
+  utils.loadCredentialsAndGetToken(credPath, credFileName, authServerURL)
+  .then(response => {
+    token = response["Token"]
+    api.getAllJobsInfoAPI(chronosURL, token, skip, limit, status, state)
     .then(response => {
-      token = response["Token"]
-      api.getAllJobsInfoAPI(chronosURL, token, skip, limit, status, state)
-      .then(response => {
-        //print job descriptors in tabular form
-        this.printTable(response.job_descriptors)
-      })
-     })
+      //print job descriptors in tabular form
+      this.printTable(response.job_descriptors)
     })
+  })
   .catch(error => {
     console.log(error)
     return

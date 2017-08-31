@@ -18,7 +18,7 @@ _parseJSON = function(response) {
   return response.json();
 }
 
-exports.loadCredentials = function loadCredentials(credPath, credFileName) {
+loadCredentials = function(credPath, credFileName) {
   return new Promise(function (fulfill, reject) {
     let authString = "";
     const path = process.env.HOME + "/" + credPath + credFileName;
@@ -38,7 +38,7 @@ exports.loadCredentials = function loadCredentials(credPath, credFileName) {
   })
 }
 
-exports.loadDataFromFile = function loadDataFromFile(filePath) {
+loadDataFromFile = function(filePath) {
   return new Promise(function (fulfill, reject) {
     fs.readFile(filePath, 'utf8', function(err,data) {
       if (err) {
@@ -51,7 +51,7 @@ exports.loadDataFromFile = function loadDataFromFile(filePath) {
   })
 }
 
-exports.getToken = function getToken(authServerURL, authString) {
+getToken = function(authServerURL, authString) {
   return new Promise(function(fulfill, reject) {
     const requestHeader = new Headers();
     requestHeader.append('User-Agent', 'Chronos');
@@ -74,4 +74,30 @@ exports.getToken = function getToken(authServerURL, authString) {
       reject(error)
     })
   })
+}
+
+loadCredentialsAndGetToken = function(credPath, credFileName, authServerURL) {
+  return new Promise(function(fulfill, reject) {
+    this.loadCredentials(credPath, credFileName)
+    .then(authString => {
+      this.getToken(authServerURL, authString)
+      .then(token => {
+        fulfill(token)
+      })
+      .catch(error => {
+        console.log(error)
+        reject(error)
+      })
+    })
+    .catch(error => {
+      reject(error)
+    })
+  })
+}
+
+module.exports = {
+  loadCredentialsAndGetToken: loadCredentialsAndGetToken,
+  getToken: getToken,
+  loadCredentials: loadCredentials,
+  loadDataFromFile: loadDataFromFile
 }
