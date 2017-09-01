@@ -1,16 +1,18 @@
 const chronosSDK = require('chronos-sdk')
 const getAllJobsInfo = require('./all_info_cmd')
+const getJobInfo = require('./info_cmd')
 const publish = require('./publish_cmd')
 const Config = require('./config')
 const version = require('./version_cmd')
 const schedule = require('./schedule_cmd')
 const utils = require('./utils');
+
 //argv[0] -- node binary path
 //argv[1] -- current directory
 var cmd = process.argv[2];
-var inputFile = "";
+var arg = "";
 if (process.argv[3]) {
-  inputFile = process.argv[3];
+  arg = process.argv[3];
 }
 
 switch(cmd) {
@@ -23,19 +25,19 @@ switch(cmd) {
     break;
 
   case "schedule":
-    schedule(Config.chronosFullURL, inputFile, Config.credPath, Config.credFileName, Config.authServerURL);
+    schedule(Config.chronosFullURL, arg, Config.credPath, Config.credFileName, Config.authServerURL);
     break;
 
   case "remove":
     break;
 
   case "info":
-  //getalljobsinfo
-    getAllJobsInfo(Config.credPath, Config.credFileName, Config.authServerURL, Config.chronosFullURL, 0, 10000, "*", "*" )
+    getJobInfo(Config.credPath, Config.credFileName, Config.authServerURL, Config.chronosFullURL, arg)
     break;
 
   case "allinfo":
-
+  //getalljobsinfo
+    getAllJobsInfo(Config.credPath, Config.credFileName, Config.authServerURL, Config.chronosFullURL, 0, 10000, "*", "*" )
     break;
 
   case "version":

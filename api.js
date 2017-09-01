@@ -14,6 +14,29 @@ _parseJSON = function(response) {
   return response.json();
 }
 
+exports.getJobInfoAPI = function getJobInfoAPI(chronosURL, token, jobID) {
+  const url = chronosURL + `/v1/jobinfo/${jobID}`;
+  return new Promise(function(fulfill, reject) {
+    const requestHeader = new Headers();
+    requestHeader.append('User-Agent', 'Chronos');
+    requestHeader.append('Authorization', 'Bearer ' + token);
+    requestHeader.append('Content-Type', 'application/json');
+    return fetch(url, {
+      method: 'GET',
+      headers: requestHeader
+    })
+    .then(this._checkStatus)
+    .then(this._parseJSON)
+    .then(data => {
+      fulfill(data)
+    })
+    .catch(error => {
+      console.log(error)
+      reject(error)
+    })
+  })
+}
+
 exports.getAllJobsInfoAPI = function getAllJobsInfoAPI(chronosURL, token, skip, limit, status, state) {
   const url = chronosURL + `/v1/alljobsinfo/skip/${skip}/limit/${limit}/status/${status}/state/${state}`;
   return new Promise(function(fulfill, reject) {
