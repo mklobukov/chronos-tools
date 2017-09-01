@@ -1,6 +1,7 @@
 const utils = require('./utils');
 const api = require('./api');
 const Table = require('cli-table')
+const colors = require('colors/safe');
 
 module.exports = function(credPath, credFileName, authServerURL, chronosURL, skip, limit, status, state) {
   //get credentials
@@ -30,21 +31,25 @@ printTable = function(jobDescriptors) {
     head: columnTitles
   });
 
-  jobDescriptors.forEach(function(job) {
-    let tableRow = [];
-    propsToDisplay.forEach(function(prop) {
-      if (job.hasOwnProperty(prop)) {
-        if (prop == "next_scheduled_run") {
-          tableRow.push(new Date(job[prop] * 1000).toUTCString())
+  if (jobDescriptors && jobDescriptors.length > 0) {
+    jobDescriptors.forEach(function(job) {
+      let tableRow = [];
+      propsToDisplay.forEach(function(prop) {
+        if (job.hasOwnProperty(prop)) {
+          if (prop == "next_scheduled_run") {
+            tableRow.push(new Date(job[prop] * 1000).toUTCString())
+          }
+          else {
+            tableRow.push(job[prop])
+          }
+        } else {
+          tableRow.push("")
         }
-        else {
-          tableRow.push(job[prop])
-        }
-      } else {
-        tableRow.push("")
-      }
+      })
+      table.push(tableRow)
     })
-    table.push(tableRow)
-  })
-  console.log(table.toString())
+    console.log(table.toString())
+  } else {
+    console.log(colors.magenta("No data found"))
+  }
 }

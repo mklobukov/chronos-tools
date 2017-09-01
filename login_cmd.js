@@ -49,16 +49,13 @@ promptAndSaveCredentials = function(key, secret, credPath, credFileName) {
       }}, function (err, result) {
           appKey = result.appkey.replace(/(\r\n|\n|\r)/gm,"");
           appSecret = result.appsecret.replace(/(\r\n|\n|\r)/gm,"");
-          console.log(appKey, appSecret)
           //write credentials to the file
           //if the directory with credentials file doesn't exist, create it
           if (!fs.existsSync(credDirPath)) {
             fs.mkdirSync(credDirPath);
           }
-
           //write appkey and appsecret to the file inside this directory
           const dataStr = `{"key": "${appKey}", "secret": "${appSecret}"}`
-          console.log("Data string: ", dataStr)
           fs.writeFile(credFilePath, dataStr, function(err) {
             if (err) {
               console.log("Error writing credentials to file")

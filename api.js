@@ -1,6 +1,7 @@
+const colors = require('colors/safe');
+
 _checkStatus = function(response) {
-  console.log('Response from API: ', response.url);
-  console.log('Status: ', response.status)
+  console.log(colors.cyan('Response from API: '), response.url, " -- Status: ", response.status);
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {
