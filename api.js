@@ -106,3 +106,26 @@ exports.scheduleJobAPI = function scheduleJobAPI(chronosURL, token, requestBody)
     })
   })
 }
+
+exports.removeJobAPI = function removeJobAPI(chronosURL, token, requestBody) {
+  const url = chronosURL + "/v1/removejob";
+  return new Promise(function(fulfill, reject) {
+    const requestHeader = new Headers();
+    requestHeader.append('Authorization', 'Bearer ' + token);
+    requestHeader.append('Content-Type', 'application/json');
+    return fetch(url, {
+      method: 'POST',
+      headers: requestHeader,
+      body: requestBody
+    })
+    .then(this._checkStatus)
+    .then(this._parseJSON)
+    .then(data => {
+      fulfill(data)
+    })
+    .catch(error => {
+      console.log(error)
+      reject(error)
+    })
+  })
+}

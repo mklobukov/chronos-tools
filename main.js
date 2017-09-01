@@ -1,6 +1,7 @@
 const chronosSDK = require('chronos-sdk')
 const getAllJobsInfo = require('./all_info_cmd')
 const getJobInfo = require('./info_cmd')
+const removeJob = require('./remove_cmd')
 const publish = require('./publish_cmd')
 const Config = require('./config')
 const version = require('./version_cmd')
@@ -29,10 +30,11 @@ switch(cmd) {
     break;
 
   case "remove":
+    removeJob(Config.chronosFullURL, Config.credPath, Config.credFileName, Config.authServerURL, arg);
     break;
 
   case "info":
-    getJobInfo(Config.credPath, Config.credFileName, Config.authServerURL, Config.chronosFullURL, arg)
+    getJobInfo(Config.credPath, Config.credFileName, Config.authServerURL, Config.chronosFullURL, arg);
     break;
 
   case "allinfo":
