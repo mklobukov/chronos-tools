@@ -2,12 +2,14 @@ const chronosSDK = require('chronos-sdk')
 const getAllJobsInfo = require('./all_info_cmd')
 const getJobInfo = require('./info_cmd')
 const removeJob = require('./remove_cmd')
+const stopJob = require('./stop_cmd')
 const publish = require('./publish_cmd')
 const login = require('./login_cmd')
 const Config = require('./config')
 const version = require('./version_cmd')
 const schedule = require('./schedule_cmd')
 const utils = require('./utils')
+
 
 //argv[0] -- node binary path
 //argv[1] -- current directory
@@ -36,6 +38,10 @@ switch(cmd) {
 
   case "remove":
     removeJob(Config.chronosFullURL, Config.credPath, Config.credFileName, Config.authServerURL, arg1);
+    break;
+
+  case "stop":
+    stopJob(Config.chronosFullURL, Config.credPath, Config.credFileName, Config.authServerURL, arg1);
     break;
 
   case "info":

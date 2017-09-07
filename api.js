@@ -1,7 +1,7 @@
 const colors = require('colors/safe');
 
 _checkStatus = function(response) {
-  console.log(colors.cyan('Response from API: '), response.url, " -- Status: ", response.status);
+  console.log(colors.cyan('Response from API: '), response.url, " -- ", colors.magenta("Status: "), response.status);
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {
@@ -110,6 +110,29 @@ exports.scheduleJobAPI = function scheduleJobAPI(chronosURL, token, requestBody)
 
 exports.removeJobAPI = function removeJobAPI(chronosURL, token, requestBody) {
   const url = chronosURL + "/v1/removejob";
+  return new Promise(function(fulfill, reject) {
+    const requestHeader = new Headers();
+    requestHeader.append('Authorization', 'Bearer ' + token);
+    requestHeader.append('Content-Type', 'application/json');
+    return fetch(url, {
+      method: 'POST',
+      headers: requestHeader,
+      body: requestBody
+    })
+    .then(this._checkStatus)
+    .then(this._parseJSON)
+    .then(data => {
+      fulfill(data)
+    })
+    .catch(error => {
+      console.log(error)
+      reject(error)
+    })
+  })
+}
+
+exports.stopJobAPI = function stopJobAPI(chronosURL, token, requestBody) {
+  const url = chronosURL + "/v1/stopjob";
   return new Promise(function(fulfill, reject) {
     const requestHeader = new Headers();
     requestHeader.append('Authorization', 'Bearer ' + token);
