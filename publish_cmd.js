@@ -1,27 +1,47 @@
 const Config = require('./config');
-const Docker = require('dockerode');
+const { spawn } = require('child_process');
 
 module.exports = function publish() {
   const imageName = Config.dockerPrivateRepoURL + "/" + Config.dockerJobName;
-  this.pushImageToRepo(imageName)
+  const auth = Config.docker_repo_config;
+
+  //docker login -u username -p password serveraddress
+  const docker_login = spawn('docker', ['login', '-u', auth.username, '-p', auth.password, auth.serveraddress]);
+  docker_login.stdout.on('data', (data) => {
+      console.log(`Docker login stdout: ${data}`);
+      this.pushImageToRepo(imageName);
+  });
+
+  docker_login.stderr.on('data', (data) => {
+    console.log(`Docker login stderr: ${data}`);
+  });
+
+  docker_login.on('error', (err) => {
+    console.log("Failed to start docker subprocess.")
+  });
+
+  docker_login.on('close', (code) => {
+    console.log(`Docker login process exited with code ${code}.`);
+  });
 }
 
 pushImageToRepo = function(imageName) {
-  const authConfig = Config.docker_repo_config;
-  console.log(authConfig)
-  // const buffer = new Buffer(JSON.stringify(authConfig));
-  // const options = buffer.toString('base64');
-  let docker = new Docker();
-  image = docker.getImage(imageName);
-  console.log(image)
+  //docker push serverAddress/imageName
+  const image_publish = spawn('docker', ['push', imageName]);
 
-  image.push(authConfig, function(err,data) {
-    if (err) {
-      console.log("Error pushing image to repo: ", err)
-      return
-    }
-    if (data) {
-      console.log("Data: ", data);
-    }
-  }, authConfig)
+  image_publish.stdout.on('data', (data) => {
+    console.log(`Publish image stdout: ${data}`);
+  });
+
+  image_publish.stderr.on('data', (data) => {
+    console.log(`Publish image stderr: ${data}`);
+  });
+
+  image_publish.on('error', (err) => {
+    console.log("Failed to start docker subprocess.");
+  });
+
+  image_publish.on('close', (code) => {
+    console.log(`Docker image publish process exited with code ${code}.`);
+  });
 }
