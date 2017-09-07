@@ -41,10 +41,18 @@ promptAndSaveCredentials = function(key, secret, credPath, credFileName) {
     prompt.get({
       properties: {
         appkey: {
-          description: colors.magenta("App key")
+          description: colors.magenta("App key"),
+          required: true,
+          message: "Please provide the app key",
+          hidden: true,
+          replace: '*'
         },
         appsecret: {
-          description: colors.cyan("App secret")
+          description: colors.cyan("App secret"),
+          required: true,
+          message: "Please provide the app secret",
+          hidden: true,
+          replace: '*'
         }
       }}, function (err, result) {
           appKey = result.appkey.replace(/(\r\n|\n|\r)/gm,"");
