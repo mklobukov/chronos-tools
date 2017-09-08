@@ -1,5 +1,5 @@
 const utils = require('./utils');
-const api = require('./api')
+const api = require('./api');
 
 module.exports = function(chronosURL) {
   api.getVersionAPI(chronosURL)

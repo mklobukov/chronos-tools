@@ -1,6 +1,5 @@
-var fs = require('fs')
-var path = require('path')
-var request = require('request')
+const fs = require('fs');
+const path = require('path');
 const colors = require('colors/safe');
 
 

@@ -1,7 +1,7 @@
 const utils = require('./utils');
 const prompt = require('prompt');
 const colors = require('colors/safe');
-const fs = require('fs')
+const fs = require('fs');
 
 module.exports = function(key, secret, credPath, credFileName, authServerURL) {
   this.promptAndSaveCredentials(key, secret, credPath, credFileName)

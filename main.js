@@ -5,10 +5,22 @@ const removeJob = require('./remove_cmd');
 const stopJob = require('./stop_cmd');
 const publish = require('./publish_cmd');
 const login = require('./login_cmd');
-const Config = require('./config');
 const version = require('./version_cmd');
 const schedule = require('./schedule_cmd');
 const utils = require('./utils');
+const fs = require('fs');
+
+//default distributed config
+//includes path to credentials file, authserver url, and chronos url
+const defaultConfig = require('./default_config.json');
+//config customized by user. Adds fields to Config and can override
+//authserver url and chronos url
+const customConfig = JSON.parse(fs.readFileSync('./custom_config.json', 'utf8'));
+//do not allow modification of credPath and credFileName:
+delete customConfig.credPath;
+delete customConfig.credFileName;
+//merge the two configs together:
+const Config = Object.assign({}, defaultConfig, customConfig);
 
 //argv[0] -- node binary path
 //argv[1] -- current directory
@@ -22,38 +34,39 @@ if (process.argv[4]) {
   arg2 = process.argv[4]
 }
 
+
 switch(cmd) {
   case "login":
     login(arg1, arg2, Config.credPath, Config.credFileName, Config.authServerURL);
     break;
 
   case "publish":
-    publish();
+    publish(Config.dockerPrivateRepoURL, Config.dockerJobName, Config.dockerCredentials);
     break;
 
   case "schedule":
-    schedule(Config.chronosFullURL, arg1, Config.credPath, Config.credFileName, Config.authServerURL);
+    schedule(Config.chronosURL, arg1, Config.credPath, Config.credFileName, Config.authServerURL);
     break;
 
   case "remove":
-    removeJob(Config.chronosFullURL, Config.credPath, Config.credFileName, Config.authServerURL, arg1);
+    removeJob(Config.chronosURL, Config.credPath, Config.credFileName, Config.authServerURL, arg1);
     break;
 
   case "stop":
-    stopJob(Config.chronosFullURL, Config.credPath, Config.credFileName, Config.authServerURL, arg1);
+    stopJob(Config.chronosURL, Config.credPath, Config.credFileName, Config.authServerURL, arg1);
     break;
 
   case "info":
-    getJobInfo(Config.credPath, Config.credFileName, Config.authServerURL, Config.chronosFullURL, arg1);
+    getJobInfo(Config.credPath, Config.credFileName, Config.authServerURL, Config.chronosURL, arg1);
     break;
 
   case "allinfo":
   //getalljobsinfo
-    getAllJobsInfo(Config.credPath, Config.credFileName, Config.authServerURL, Config.chronosFullURL, 0, 10000, "*", "*" )
+    getAllJobsInfo(Config.credPath, Config.credFileName, Config.authServerURL, Config.chronosURL, 0, 10000, "*", "*" )
     break;
 
   case "version":
-    version(Config.chronosFullURL);
+    version(Config.chronosURL);
     break;
 
   case "test":

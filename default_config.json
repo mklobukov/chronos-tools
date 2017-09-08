@@ -1,0 +1,6 @@
+{
+  "credPath": ".chronos/",
+  "credFileName": "credentials.json",
+  "authServerURL": "http://localhost:4655/v1/login/",
+  "chronosURL": "http://localhost:8080"
+}

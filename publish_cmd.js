@@ -1,9 +1,9 @@
 const Config = require('./config');
 const { spawn } = require('child_process');
 
-module.exports = function publish() {
-  const imageName = Config.dockerPrivateRepoURL + "/" + Config.dockerJobName;
-  const auth = Config.docker_repo_config;
+module.exports = function publish(dockerPrivateRepoURL, dockerJobName, dockerCredentials) {
+  const imageName = dockerPrivateRepoURL + "/" + dockerJobName;
+  const auth = dockerCredentials;
 
   //docker login -u username -p password serveraddress
   const docker_login = spawn('docker', ['login', '-u', auth.username, '-p', auth.password, auth.serveraddress]);
