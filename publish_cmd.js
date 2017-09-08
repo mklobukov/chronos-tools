@@ -1,4 +1,3 @@
-const Config = require('./config');
 const { spawn } = require('child_process');
 
 module.exports = function publish(dockerPrivateRepoURL, dockerJobName, dockerCredentials) {

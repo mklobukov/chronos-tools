@@ -1,6 +1,6 @@
 const utils = require('./utils');
 const api = require('./api');
-const Table = require('cli-table')
+const Table = require('cli-table');
 
 module.exports = function(credPath, credFileName, authServerURL, chronosURL, jobID) {
   //get credentials

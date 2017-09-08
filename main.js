@@ -9,18 +9,30 @@ const version = require('./version_cmd');
 const schedule = require('./schedule_cmd');
 const utils = require('./utils');
 const fs = require('fs');
+const colors = require('colors');
 
 //default distributed config
 //includes path to credentials file, authserver url, and chronos url
 const defaultConfig = require('./default_config.json');
 //config customized by user. Adds fields to Config and can override
 //authserver url and chronos url
-const customConfig = JSON.parse(fs.readFileSync('./custom_config.json', 'utf8'));
-//do not allow modification of credPath and credFileName:
-delete customConfig.credPath;
-delete customConfig.credFileName;
-//merge the two configs together:
-const Config = Object.assign({}, defaultConfig, customConfig);
+let customConfig, Config;
+
+try {
+  customConfig = JSON.parse(fs.readFileSync('./custom_config.json', 'utf8'));
+} catch (err) {
+  console.log(colors.magenta("Custom config not provided, using default values only"));
+}
+
+if (customConfig) {
+  //do not allow modification of credPath and credFileName:
+  delete customConfig.credPath;
+  delete customConfig.credFileName;
+  //merge the two configs together:
+  Config = Object.assign({}, defaultConfig, customConfig);
+} else {
+  Config = defaultConfig;
+}
 
 //argv[0] -- node binary path
 //argv[1] -- current directory

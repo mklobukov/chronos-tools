@@ -95,6 +95,8 @@ loadCredentialsAndGetToken = function(credPath, credFileName, authServerURL) {
   })
 }
 
+
+
 module.exports = {
   loadCredentialsAndGetToken: loadCredentialsAndGetToken,
   getToken: getToken,

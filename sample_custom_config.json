@@ -1,0 +1,9 @@
+{
+  "dockerJobName": "",
+  "dockerPrivateRepoURL": "",
+  "dockerCredentials": {
+    "username": "",
+    "password": "",
+    "serveraddress": ""
+  }
+}
