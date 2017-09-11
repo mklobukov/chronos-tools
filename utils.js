@@ -42,7 +42,6 @@ loadDataFromFile = function(filePath) {
   return new Promise(function (fulfill, reject) {
     fs.readFile(filePath, 'utf8', function(err,data) {
       if (err) {
-        console.log(err)
         reject(err)
       } else {
         return fulfill(data)

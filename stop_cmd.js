@@ -1,5 +1,6 @@
 const utils = require('./utils');
 const api = require('./api');
+const colors = require('colors');
 
 module.exports = function(chronosURL, credPath, credFileName, authServerURL, jobID) {
   stopRequestBody = {
@@ -11,13 +12,13 @@ module.exports = function(chronosURL, credPath, credFileName, authServerURL, job
     token = response["Token"]
     api.stopJobAPI(chronosURL, token, JSON.stringify(stopRequestBody))
     .then(response => {
-      console.log("Force stopped the job with job ID ", jobID);
+      console.log(colors.green("Force stopped the job with job ID: "), jobID);
     })
     .catch(error => {
-      console.log("Error stopping the job with job ID ", jobID);
+      console.log(colors.red("Error stopping the job: "), error.message);
     })
   })
   .catch(error => {
-    console.log(error);
+    console.log(colors.red("Error loading credentials: "), error.message);
   })
 }

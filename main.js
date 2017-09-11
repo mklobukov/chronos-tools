@@ -87,5 +87,5 @@ switch(cmd) {
     break;
 
   default:
-    console.log(colors.yellow("Unknown command: "), colors.blue(cmd))
+    console.log(colors.red("Unknown command: "), cmd)
 }

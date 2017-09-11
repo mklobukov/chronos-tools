@@ -16,11 +16,11 @@ module.exports = function(key, secret, credPath, credFileName, authServerURL) {
       console.log("Token: ", response["Token"])
     })
     .catch(error => {
-      console.log("Could not get token with provided credentials");
+      console.log(colors.red("Error getting token with provided credentials: "), error.message);
     })
   })
   .catch(error => {
-    console.log("Error: ", error);
+    console.log(colors.red("Error in prompting/saving credentials: "), error.message);
   })
 }
 
@@ -62,11 +62,10 @@ promptAndSaveCredentials = function(key, secret, credPath, credFileName) {
           if (!fs.existsSync(credDirPath)) {
             fs.mkdirSync(credDirPath);
           }
-          //write appkey and appsecret to the file inside this directory
+          //write appkey and appsecret to the file in this directory
           const dataStr = `{"key": "${appKey}", "secret": "${appSecret}"}`
           fs.writeFile(credFilePath, dataStr, function(err) {
             if (err) {
-              console.log("Error writing credentials to file")
               return reject(err)
             }
             return fulfill({"appKey" : appKey, "appSecret" : appSecret})

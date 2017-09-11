@@ -125,7 +125,7 @@ exports.removeJobAPI = function removeJobAPI(chronosURL, token, requestBody) {
       fulfill(data)
     })
     .catch(error => {
-      console.log(error)
+      //console.log(error)
       reject(error)
     })
   })

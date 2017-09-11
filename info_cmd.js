@@ -1,6 +1,7 @@
 const utils = require('./utils');
 const api = require('./api');
 const Table = require('cli-table');
+const colors = require('colors/safe');
 
 module.exports = function(credPath, credFileName, authServerURL, chronosURL, jobID) {
   //get credentials
@@ -12,10 +13,12 @@ module.exports = function(credPath, credFileName, authServerURL, chronosURL, job
     .then(response => {
       this.printJobInfo(response)
     })
+    .catch(error => {
+      console.log(colors.red("Error getting job info: "), error.message);
+    })
   })
   .catch(error => {
-    console.log(error)
-    return
+    console.log(colors.red("Error loading credentials: "), error.message);
   })
 }
 

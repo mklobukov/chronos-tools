@@ -1,5 +1,6 @@
 const utils = require('./utils');
 const api = require('./api');
+const colors = require('colors/safe');
 
 module.exports = function(chronosURL) {
   api.getVersionAPI(chronosURL)
@@ -12,7 +13,7 @@ module.exports = function(chronosURL) {
     return
   })
   .catch(error => {
-    console.log("Error getting Chronos version: ", error)
+    console.log(colors.red("Error getting Chronos version: "), error.message)
     return
   })
 }
