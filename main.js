@@ -1,4 +1,3 @@
-const chronosSDK = require('chronos-sdk');
 const getAllJobsInfo = require('./all_info_cmd');
 const getJobInfo = require('./info_cmd');
 const removeJob = require('./remove_cmd');
@@ -88,5 +87,5 @@ switch(cmd) {
     break;
 
   default:
-    console.log("Unknown command: ", cmd)
+    console.log(colors.yellow("Unknown command: "), colors.blue(cmd))
 }

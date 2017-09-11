@@ -27,9 +27,9 @@
   "dependencies": {
     "request": "2.81.0",
     "cli-table":  "0.3.1",
-    "dockerode": "2.5.0",
+    "colors": "1.1.2",
     "prompt": "1.0.0",
-    "colors": "1.1.2"
+    "isomorphic-fetch": "2.2.1"
   },
   "devDependencies": {
     "babel-cli": "6.10.1",

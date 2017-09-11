@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const colors = require('colors/safe');
-
+require('isomorphic-fetch');
 
 _checkStatus = function(response) {
   console.log(colors.cyan('Response from API: '), response.url, " -- Status: ", response.status);
@@ -94,8 +94,6 @@ loadCredentialsAndGetToken = function(credPath, credFileName, authServerURL) {
     })
   })
 }
-
-
 
 module.exports = {
   loadCredentialsAndGetToken: loadCredentialsAndGetToken,
