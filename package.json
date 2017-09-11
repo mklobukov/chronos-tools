@@ -1,8 +1,10 @@
 {
   "name": "chronos-tools",
   "version": "1.0.0",
+  "author": "Comcast Iris",
   "description": "Chronos Client Tools",
-  "main": "dist/index.js",
+  "license": "MIT",
+  "main": "main.js",
   "scripts": {
   "prebuild": "rimraf dist",
   "build": "npm-run-all --parallel build:*",

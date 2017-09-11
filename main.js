@@ -13,12 +13,14 @@ const colors = require('colors');
 //default distributed config
 //includes path to credentials file, authserver url, and chronos url
 const defaultConfig = require('./default_config.json');
-//config customized by user. Adds fields to Config and can override
-//authserver url and chronos url
+
+//customConfig - config customized by user. To be placed in HOME/.chronos/config.json.
+//Adds fields to Config and can override authserver url and chronos url
 let customConfig, Config;
 
 try {
-  customConfig = JSON.parse(fs.readFileSync('./custom_config.json', 'utf8'));
+  const pathToConfig = process.env.HOME + "/" + defaultConfig.credPath + 'config.json';
+  customConfig = JSON.parse(fs.readFileSync(pathToConfig, 'utf8'));
 } catch (err) {
   console.log(colors.magenta("Custom config not provided, using default values only"));
 }
