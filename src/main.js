@@ -23,7 +23,7 @@ try {
   const pathToConfig = process.env.HOME + "/" + defaultConfig.credPath + 'config.json';
   customConfig = JSON.parse(fs.readFileSync(pathToConfig, 'utf8'));
 } catch (err) {
-  console.log(colors.magenta("Custom config not provided, using default values only"));
+  console.log(colors.magenta("Custom config not found, using default values only"));
 }
 
 if (customConfig) {
@@ -47,7 +47,6 @@ if (process.argv[3]) {
 if (process.argv[4]) {
   arg2 = process.argv[4]
 }
-
 
 switch(cmd) {
   case "login":
@@ -75,7 +74,6 @@ switch(cmd) {
     break;
 
   case "allinfo":
-    //getalljobsinfo
     getAllJobsInfo(Config.credPath, Config.credFileName, Config.authServerURL, Config.chronosURL, 0, 10000, "*", "*" )
     break;
 
@@ -84,11 +82,15 @@ switch(cmd) {
     break;
 
   case "test":
-    utils.loadCredentialsAndGetToken(Config.credPath, Config.credFileName, Config.authServerURL)
-    .then(data => {console.log(data)})
-    .catch(err => {console.log(err)})
+    // utils.loadCredentialsAndGetToken(Config.credPath, Config.credFileName, Config.authServerURL)
+    // .then(data => {console.log(data)})
+    // .catch(err => {console.log(err)})
     break;
 
   default:
+    if (cmd == undefined) {
+      console.log(colors.red("No arguments provided. Refer to README for instructions."));
+      return
+    }
     console.log(colors.red("Unknown command: "), cmd)
 }
