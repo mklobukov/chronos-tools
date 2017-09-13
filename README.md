@@ -52,7 +52,10 @@ Publishes the job with the name provided in your custom config file in ```~/.chr
 
 * ```chronostools remove {jobID}```
 
-Removes the job with provided job ID.
+Removes the job with provided job ID. Sample output:
+```
+Removed the job with job ID: e812b3b3-62e1-4df6-90ab-63b5ed55ded9
+```
 
 * ```chronostools schedule {filePath}```
 
@@ -74,8 +77,16 @@ Refer to Chronos documentation for explanation of each field.
 
 * ```chronostools stop {jobID}```
 
-Force stops the job with the provided job ID.
+Force stops the job with the provided job ID. Sample output:
+
+```
+Force stopped the job with job ID:  e812b3b3-62e1-4df6-90ab-63b5ed55ded9
+```
 
 * ```chronostools version```
 
-Prints version of Chronos.
+Prints version of Chronos. Sample output:
+
+```
+Chronos Server 0.0.1
+```
