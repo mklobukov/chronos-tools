@@ -8,8 +8,8 @@ npm install -g chronos-tools
 This will save an executable called chronostools to ```usr/local/bin/```
 
 # Configs and authorization
-The default config file (default_config.json) included in the project contains
-* Path and filename of the file with app key and secret (cannot be overridden)
+The default config file (default_config.json) included in the project contains:
+* Path to the file with app key and secret (cannot be overridden)
 * AUM and Chronos URLs (can be overridden)
 
 To override AUM and Chronos URLs, as well as to provide Docker credentials, place a file called ```config.json``` in ```~/.chronos/```. Refer to ```sample_custom_config.json``` to see what goes into this config file.
