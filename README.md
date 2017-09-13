@@ -5,7 +5,7 @@ Install with the following command:
 ```
 npm install -g chronos-tools
 ```
-This will save an executable called chronostools to ```/usr/local/bin/```
+This will save an executable called `chronostools` to ```/usr/local/bin/```
 
 # Configs and authorization
 The default config file (default_config.json) included in the project contains:
