@@ -1,4 +1,6 @@
 {
+  "authServerURL": "",
+  "chronosURL": "", 
   "dockerJobName": "",
   "dockerPrivateRepoURL": "",
   "dockerCredentials": {
