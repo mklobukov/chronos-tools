@@ -5,10 +5,10 @@ Install with the following command:
 ```
 npm install -g chronos-tools
 ```
-This will save an executable called chronostools to ```usr/local/bin/``` 
+This will save an executable called chronostools to ```usr/local/bin/```
 
 # Commands
-* chronostools allinfo
+* ```chronostools allinfo```
 
 Prints a table with description of all the jobs. Sample output:
 ```
@@ -21,7 +21,7 @@ Prints a table with description of all the jobs. Sample output:
 ├──────────────────────────────────────┼─────────────┼────────────────┼─────────┼───────────┼────────────────┼───────────────────────────────┤
 ```
 
-* chronostools info {jobID}
+* ```chronostools info {jobID}```
 
 Prints information for a job with the provided job ID. Sample output:
 ```
@@ -32,27 +32,27 @@ Prints information for a job with the provided job ID. Sample output:
 ├──────────────────────────────────────┼─────────────┼────────────────┼─────────┼───────────┼────────────────┼───────────────────────────────┤
 ```
 
-* chronostools login
+* ```chronostools login```
 
 If an app key and secret are found on your machine, this command will print the token. If not found, it will prompt for app key and secret, save them
 to a file, and then print token.
 
-* chronostools publish
+* ```chronostools publish```
 
 Publishes the job with the name provided in your config file.
 
-* chronostools remove {jobID}
+* ```chronostools remove {jobID}```
 
 Removes the job with provided job ID.
 
-* chronostools schedule {filePath}
+* ```chronostools schedule {filePath}```
 
 Schedules the job with description provided in a JSON file located at {filePath}
 
-* chronostools stop {jobID}
+* ```chronostools stop {jobID}```
 
 Force stops the job with the provided job ID.
 
-* chronostools version
+* ```chronostools version```
 
 Prints version of Chronos.
