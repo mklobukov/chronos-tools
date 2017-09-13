@@ -43,7 +43,7 @@ Prints information for a job with the provided job ID. Sample output:
 
 * ```chronostools login```
 
-If an app key and secret are found on your machine, this command will print the token. If not found, it will prompt for app key and secret, save them
+If an app key and secret are found in ```~/.chronos/credentials.json```, this command will print the token. If not found, it will prompt for app key and secret, save them
 to ```~/.chronos/credentials.json``` and then print token.
 
 * ```chronostools publish```
