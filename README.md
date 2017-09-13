@@ -44,11 +44,11 @@ Prints information for a job with the provided job ID. Sample output:
 * ```chronostools login```
 
 If an app key and secret are found on your machine, this command will print the token. If not found, it will prompt for app key and secret, save them
-to a file, and then print token.
+to ```~/.chronos/credentials.json``` and then print token.
 
 * ```chronostools publish```
 
-Publishes the job with the name provided in your config file.
+Publishes the job with the name provided in your custom config file in ```~/.chronos/```
 
 * ```chronostools remove {jobID}```
 
@@ -57,6 +57,20 @@ Removes the job with provided job ID.
 * ```chronostools schedule {filePath}```
 
 Schedules the job with description provided in a JSON file located at {filePath}
+
+Job description file needs to have the following format:
+```
+{
+  "version": "1.0.0",
+  "name": "your_job_name",
+  "schedule": "0 * * * *",
+  "repeat": 0,
+  "callback": "http://localhost:3007/jobcallback/uno",
+  "check_in_threshold": 240,
+  "arguments": "{\"arg1\": 500}"
+}
+```
+Refer to Chronos documentation for explanation of each field.
 
 * ```chronostools stop {jobID}```
 
