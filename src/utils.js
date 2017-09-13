@@ -69,7 +69,6 @@ getToken = function(authServerURL, authString) {
       fulfill(data)
     })
     .catch(error => {
-      console.log(error)
       reject(error)
     })
   })
@@ -84,7 +83,6 @@ loadCredentialsAndGetToken = function(credPath, credFileName, authServerURL) {
         fulfill(token)
       })
       .catch(error => {
-        console.log(error)
         reject(error)
       })
     })

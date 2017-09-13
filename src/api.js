@@ -32,7 +32,6 @@ exports.getJobInfoAPI = function getJobInfoAPI(chronosURL, token, jobID) {
       fulfill(data)
     })
     .catch(error => {
-      console.log(error)
       reject(error)
     })
   })
@@ -55,7 +54,6 @@ exports.getAllJobsInfoAPI = function getAllJobsInfoAPI(chronosURL, token, skip, 
       fulfill(data)
     })
     .catch(error => {
-      console.log(error)
       reject(error)
     })
   })
@@ -78,7 +76,6 @@ exports.getVersionAPI = function getVersionAPI(chronosURL) {
       fulfill(data)
     })
     .catch(error => {
-      console.log(error)
       reject(error)
     })
   })
@@ -102,7 +99,6 @@ exports.scheduleJobAPI = function scheduleJobAPI(chronosURL, token, requestBody)
       fulfill(data)
     })
     .catch(error => {
-      console.log(error)
       reject(error)
     })
   })
@@ -125,7 +121,6 @@ exports.removeJobAPI = function removeJobAPI(chronosURL, token, requestBody) {
       fulfill(data)
     })
     .catch(error => {
-      //console.log(error)
       reject(error)
     })
   })
@@ -148,7 +143,6 @@ exports.stopJobAPI = function stopJobAPI(chronosURL, token, requestBody) {
       fulfill(data)
     })
     .catch(error => {
-      console.log(error)
       reject(error)
     })
   })
