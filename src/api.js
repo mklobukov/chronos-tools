@@ -1,10 +1,10 @@
 const colors = require('colors/safe');
 
 _checkStatus = function(response) {
-  console.log(colors.cyan('Response from API: '), response.url, " -- ", colors.magenta("Status: "), response.status);
   if (response.status >= 200 && response.status < 300) {
     return response;
   } else {
+    console.log(colors.cyan('Response from API: '), response.url, " -- ", colors.magenta("Status: "), response.status);
     let error = new Error(response.statusText);
     error.response = response;
     throw error;
