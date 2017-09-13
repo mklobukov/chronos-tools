@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 const getAllJobsInfo = require('./all_info_cmd');
 const getJobInfo = require('./info_cmd');
 const removeJob = require('./remove_cmd');
@@ -12,7 +13,7 @@ const colors = require('colors');
 
 //default distributed config
 //includes path to credentials file, authserver url, and chronos url
-const defaultConfig = require('./default_config.json');
+const defaultConfig = require('../default_config.json');
 
 //customConfig - config customized by user. To be placed in HOME/.chronos/config.json.
 //Adds fields to Config and can override authserver url and chronos url
@@ -74,7 +75,7 @@ switch(cmd) {
     break;
 
   case "allinfo":
-  //getalljobsinfo
+    //getalljobsinfo
     getAllJobsInfo(Config.credPath, Config.credFileName, Config.authServerURL, Config.chronosURL, 0, 10000, "*", "*" )
     break;
 
